@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <form action="" method="get">
+        <label>名前:<input type="text" size="20" name="your_name"></label>
+        <input type="submit" value="送信">
+    </form>
+    {% if your_name %}
+        {{ your_name }}さん、こんにちは。
+    {% endif %}
+{% endblock %}
+
+
+def hello_get_query(request):
+    d = {
+        'your_name': request.GET.get('your_name')
+    }
+    return render(request, 'get_query.html', d)
+
+-----------------------------------------------------------------
+
+
+    <form action="http://foo.com" method="get">
+  <div>
+    <label for="say">What greeting do you want to say?</label>
+    <input name="say" id="say" value="Hi">
+  </div>
+  <div>
+    <label for="to">Who do you want to say it to?</label>
+    <input name="to" id="to" value="Mom">
+  </div>
+  <div>
+    <button>Send my greetings</button>
+  </div>
+</form>
+
+--------------------------------------------------
+
+from flask import Flask, render_template, request
+app = Flask(__name__)
+
+@app.route('/', methods=['GET', 'POST'])
+def form():
+    return render_template('form.html')
+
+@app.route('/hello', methods=['GET', 'POST'])
+def hello():
+    return render_template('greeting.html', say=request.form['say'], to=request.form['to'])
+
+if __name__ == "__main__":
+    app.run()
+
+---------------------------------------------------
+
+<!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <title>Greeting</title>
+    </head>
+    <body>
+      <p>{{say}}  {{to}}</p>
+    </body>
+  </html>
+
+

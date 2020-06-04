@@ -1,0 +1,62 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Choose your Plan</title>
+</head>
+
+<body>
+
+<!--{% if name %}
+  <h1>Hello {{ name }}!</h1>
+{% else %}
+  <h1>Hello, World!</h1>
+  Specify your name /first/(your name) <br>
+{% endif %}
+!-->
+
+<p align="center">  
+  <font size="7">Choose your Plan</font>
+<br><br><br></p>  
+
+<form action="" method="post">
+
+<br>
+    <form action="/add" method="get">
+        
+        <p align="center">  
+        <font size="5">How size</font>
+        <br>
+        <input type="text"  name="param1" value="">
+        <font size="5">(MW)</font><br><br></p> 
+        
+        <p align="center">  
+        <font size="5">How distance from Onshore</font>
+        <br>
+        <input type="text"  name="param2" value="">
+        <font size="5">(km)</font><br><br></p>
+
+        <p align="center">  
+        <font size="5">How depth fom sea level</font>
+        <br>
+        <input type="text"  name="param3" value="">
+        <font size="5">(m)</font><br><br></p>
+
+        <p align="center">  
+        <font size="5">How long will you use</font>
+        <br>
+        <input type="text"  name="param4" value="">
+        <font size="5">(years)</font><br><br></p>
+
+        <p align="center">
+        <input type="submit"　 value="Decide"　class="button">
+        </p>
+        
+    </form>
+
+
+ 
+
+
+
+</html>
