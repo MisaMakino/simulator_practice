@@ -13,23 +13,79 @@ jQuery(function(){
 //Update data for form2
 function updateForm2() {
 jQuery(function(){
-	   jQuery.getJSON('/simulate?input1='+ document.form2.param1.value + '&input2='+ document.form2.param2.value, function(data) {
-		  	document.form2.output.value = JSON.stringify(data);
+	   jQuery.getJSON('/simulate1?input1='+ document.form2.param1.value + '&input2='+ document.form2.param2.value + 
+                      '&input3='+ document.form2.param3.value+ '&input4='+ document.form2.param4.value+
+					  '&input5='+ document.form2.param5.value+'&input6='+ document.form2.param6.value+
+					  '&input7='+ document.form2.param7.value+'&input8='+ document.form2.param8.value+
+					  '&input9='+ document.form2.param9.value, 
+                        function(data) {
+		  	document.form2.output1.value = JSON.stringify(data.output1);
+            document.form2.output2.value = JSON.stringify(data.output2);
 		});
 	});
 }
+
+//function updateForm3() {
+	//yyy.src = '/graph1.png?input1='+ document.form3.Cost.value + '&input2='
+	//+ document.form3.Risk.value}
+
 </script>
-  <h1>Calc and JSON</h1>
-	<br>
-	<p>How to Get JSON in an asynchronous manner</p>
-	<form name="form1" >
-		<textarea name="json_text1" cols="100"></textarea>
-	</form>
-	<br>
+	
+	<p align="left">          
+    <font size="7">Choose your Plan at Onshore</font>
+    </p><br><br>  
+
 	<form name="form2" action="javascript:updateForm2()">
-        INPUT1 for Simulator<input type="text"  name="param1" value="1"><br>
-        INPUT1 for Simulator<input type="text"  name="param2" value="2"><br>
-        OUTPUT1<input type="text"  name="output" value=""><br>
-        <input type="submit" value="add"><br>
+        
+       <p align="left"> 
+            <font size="5">Choose Location</font><br>
+            <input type="radio"  id="param1" name="button1" value="1">Onshore
+			<input type="radio"  id="param2" name="button1" value="2">Offshore
+			<input type="radio"  id="param3" name="button1" value="3">Subsea
+            <br><br>
+        </p> 
+
+        <p align="left"> 
+            <font size="5">Choose Transportation Metod</font><br>
+            <input type="radio"  id="param4" name="button2" value="12">Pipeline
+			<input type="radio"  id="param5" name="button2" value="12">via Plant
+			<input type="radio"  id="param6" name="button2" value="12">Ship
+    		<br><br>
+        </p>
+        
+        <p align="left"> 
+            <font size="5">How long will you use</font><br>
+            <input type="radio"  id="param7" name="button3" value="20">20
+			<input type="radio"  id="param8" name="button3" value="30">30
+			<input type="radio"  id="param9" name="button3" value="40">40
+            <br><br>
+        </p>
+
+        <p align="left"> 
+            <input type="submit" value="Decide"><br><br><br><br><br><br>
+        </p>
+
+		<p align="center">
+            <font size="5">Total Cost is</font>
+            <input type="text"  name="output1" value="">
+            <font size="5">$</font><br><br>
+        </p>
+
+        <p align="center">
+            <font size="5">Risk is</font>
+            <input type="text"  name="output2" value=""><br><br><br><br>
+        </p>
+        
+        <!--<form name="form3" action="javascript:updateForm3()">
+            Cost = <input type="text"  name="Cost" value="">
+            Risk =<input type="text"  name="Risk" value=""><br>
+            <input type="submit" value="描画"><br>
+        </form>!-->
+
+        <td>
+        <img src="/graph1.png"></img><!--< name="yyy">!-->
+        </td>
+
     </form>
+
 </html>

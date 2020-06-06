@@ -1,30 +1,21 @@
-from flask import Flask, render_template, request, jsonify, json
+from flask import Flask, render_template, request, jsonify, json, make_response
+from io import BytesIO
+from matplotlib.backends.backend_agg import FigureCanvasAgg
+from matplotlib.figure import Figure
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+
 app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "MhMining Method <br><a href='Onshore'>Onshore</a><br><a href='Offshore'>Offshore</a><br><a href='Subsea'>Subsea</a>"
+    return "MhMining Method <br><a href='Simulation'>Simulation</a><br>"
 
-@app.route("/json")
-def jsonreturn():
-    # read JSON file and send them to the web client
-    with open("./data/input.json", 'r') as f:
-        json_data = json.load(f)
-    json_str = json.dumps(json_data)
-    return json_str
+@app.route('/Simulation')
+def Simulation():
 
-@app.route('/hello')
-@app.route('/hello/<name>')
-def hello2(name=None):
-# /hello will reply basic html
-# /hello/<name> will reply with username specified in <name>
-    return render_template('hello.html', name=name)
-
-@app.route('/Onshore')
-def Onshore():
-# /ui will reply basic html
-# /ui/<name> will reply with username specified in <name>
-    return render_template('Onshore.html')
+    return render_template('calc.html')
 
 @app.route('/simulate1')
 def simulate1():
@@ -34,13 +25,17 @@ def simulate1():
     param2 = request.args.get('input2')
     param3 = request.args.get('input3')
     param4 = request.args.get('input4')
+    param5 = request.args.get('input5')
+    param6 = request.args.get('input6')
+    param7 = request.args.get('input7')
+    param8 = request.args.get('input8')
+    param9 = request.args.get('input9')
 
+    output1 = int(param1)+ int(param2)
+    output2 = 9 / 8
     # replace the next line with your simulator
 
-    output1 = int(param1) + int(param2)
-    output2 = int(param3) + int(param4)
-    output3 = int(param3) + int(param4)
-    json_str = '{"output1":' + str(output1) + ',"output2":' + str(output2) + ',"output3":' + str(output3) +'}'
+    json_str = '{"output1":' + str(output1) + ',"output2":' + str(output2) + '}'
     json_data = json.loads(json_str)
 
     # write your output to a file
@@ -48,71 +43,43 @@ def simulate1():
     with open('./data/output.json', 'w') as f:
         json.dump(json_data["output1"], f, indent=4)
         json.dump(json_data["output2"], f, indent=4)
-        json.dump(json_data["output3"], f, indent=4)
     return  json_str
 
-@app.route('/Offshore')
-def Offshore():
-# /ui will reply basic html
-# /ui/<name> will reply with username specified in <name>
-    return render_template('Offshore.html')
+#graphについてかく
 
-@app.route('/simulate2')
-def simulate2():
-# This function read two parameters from web request
-# Returns the sum of two parameters.
-    param1 = request.args.get('input1')
-    param2 = request.args.get('input2')
-    param3 = request.args.get('input3')
-    param4 = request.args.get('input4')
+@app.route('/graph1.png')
+def graph1():
+    # 本当はoutput1とoutput2を縦軸と横軸に使いたい
+    # x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    x = np.random.rand(10)*2E+12 + 2E+12
+    y = np.random.rand(10) 
+    #y = [5.5E+12, 2E+12, 3E+12, 6E+12,8E+12,2E+12, 2E+12, 2E+12, 2E+12, 2E+12]
 
-    # replace the next line with your simulator
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.clear()
 
-    output1 = int(param1) + int(param2)
-    output2 = int(param3) + int(param4)
-    output3 = int(param3) + int(param4)
-    json_str = '{"output1":' + str(output1) + ',"output2":' + str(output2) + ',"output3":' + str(output3) +'}'
-    json_data = json.loads(json_str)
+    plt.title('Cost and Risk')
+    plt.grid(which='both')
+    plt.legend()
+    plt.scatter(x, y)
+    #ここまでよくわからん
 
-    # write your output to a file
+# canvasにプロットした画像を出力
+    canvas = FigureCanvasAgg(fig)
+    png_output = BytesIO()
+    canvas.print_png(png_output)
+    data = png_output.getvalue()
+# HTML側に渡すレスポンスを生成する
+    response = make_response(data)
+    response.headers['Content-Type'] = 'image/png'
+    response.headers['Content-Length'] = len(data)
+    return response
 
-    with open('./data/output.json', 'w') as f:
-        json.dump(json_data["output1"], f, indent=4)
-        json.dump(json_data["output2"], f, indent=4)
-        json.dump(json_data["output3"], f, indent=4)
-    return  json_str
+#下には各フェーズのお金の合計金額
 
-@app.route('/Subsea')
-def Subsea():
-# /ui will reply basic html
-# /ui/<name> will reply with username specified in <name>
-    return render_template('Subsea.html')
-
-@app.route('/simulate3')
-def simulate3():
-# This function read two parameters from web request
-# Returns the sum of two parameters.
-    param1 = request.args.get('input1')
-    param2 = request.args.get('input2')
-    param3 = request.args.get('input3')
-    param4 = request.args.get('input4')
-
-    # replace the next line with your simulator
-
-    output1 = int(param1) + int(param2)
-    output2 = int(param3) + int(param4)
-    output3 = int(param3) + int(param4)
-    json_str = '{"output1":' + str(output1) + ',"output2":' + str(output2) + ',"output3":' + str(output3) +'}'
-    json_data = json.loads(json_str)
-
-    # write your output to a file
-
-    with open('./data/output.json', 'w') as f:
-        json.dump(json_data["output1"], f, indent=4)
-        json.dump(json_data["output2"], f, indent=4)
-        json.dump(json_data["output3"], f, indent=4)
-    return  json_str
-
+#df = pd.read_csv('.csv', encording='utf-8')
 
 if __name__ == "__main__":
     app.run(debug=True)
+
