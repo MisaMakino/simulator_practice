@@ -1,5 +1,5 @@
 <!doctype html>
-<title>Hello from Flask</title>
+<title>MH Mining</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
@@ -13,11 +13,7 @@ jQuery(function(){
 //Update data for form2
 function updateForm2() {
 jQuery(function(){
-	   jQuery.getJSON('/simulate1?input1='+ document.form2.param1.value + '&input2='+ document.form2.param2.value + 
-                      '&input3='+ document.form2.param3.value+ '&input4='+ document.form2.param4.value+
-					  '&input5='+ document.form2.param5.value+'&input6='+ document.form2.param6.value+
-					  '&input7='+ document.form2.param7.value+'&input8='+ document.form2.param8.value+
-					  '&input9='+ document.form2.param9.value, 
+	   jQuery.getJSON('/simulate1?input1='+ document.form2.button1.value + '&input2='+ document.form2.button2.value, 
                         function(data) {
 		  	document.form2.output1.value = JSON.stringify(data.output1);
             document.form2.output2.value = JSON.stringify(data.output2);
@@ -26,53 +22,54 @@ jQuery(function(){
 }
 
 //function updateForm3() {
-	//yyy.src = '/graph1.png?input1='+ document.form3.Cost.value + '&input2='
-	//+ document.form3.Risk.value}
+	//yyy.src = '/graph1.png?input1='+ document.form2.button1.value + '&input2='+ document.form2.button2.value,
+//} 
 
 </script>
 	
-	<p align="left">          
-    <font size="7">Choose your Plan at Onshore</font>
+	<p align="center">          
+    <font size="7">Choose your Plan</font>
     </p><br><br>  
 
-	<form name="form2" action="javascript:updateForm2()">
+	<form name="form2" action="javascript:updateForm2()" method="POST">
+    
         
-       <p align="left"> 
+       <!--<p align="left">!--> 
             <font size="5">Choose Location</font><br>
             <input type="radio"  id="param1" name="button1" value="1">Onshore
 			<input type="radio"  id="param2" name="button1" value="2">Offshore
 			<input type="radio"  id="param3" name="button1" value="3">Subsea
             <br><br>
-        </p> 
+        </p>
 
         <p align="left"> 
             <font size="5">Choose Transportation Metod</font><br>
-            <input type="radio"  id="param4" name="button2" value="12">Pipeline
-			<input type="radio"  id="param5" name="button2" value="12">via Plant
-			<input type="radio"  id="param6" name="button2" value="12">Ship
+            <input type="radio"  id="param4" name="button2" value="4">Pipeline
+			<input type="radio"  id="param5" name="button2" value="5">via Plant
+			<input type="radio"  id="param6" name="button2" value="6">Ship
     		<br><br>
         </p>
         
-        <p align="left"> 
-            <font size="5">How long will you use</font><br>
-            <input type="radio"  id="param7" name="button3" value="20">20
-			<input type="radio"  id="param8" name="button3" value="30">30
-			<input type="radio"  id="param9" name="button3" value="40">40
+        <!--<p align="left"> 
+            <font size="3">How long will you use</font><br>
+            <input type="radio"  id="param7" name="button3" value="7">20
+			<input type="radio"  id="param8" name="button3" value="8">30
+			<input type="radio"  id="param9" name="button3" value="9">40
             <br><br>
-        </p>
+        </p>!-->
 
         <p align="left"> 
-            <input type="submit" value="Decide"><br><br><br><br><br><br>
+            <input type="submit" value="Decide"><br><br><br>
         </p>
 
-		<p align="center">
-            <font size="5">Total Cost is</font>
+		<p align="left">
+            <font size="4">Total Cost is</font>
             <input type="text"  name="output1" value="">
-            <font size="5">$</font><br><br>
+            <font size="4">$</font><br><br>
         </p>
 
-        <p align="center">
-            <font size="5">Risk is</font>
+        <p align="left">
+            <font size="4">Risk is</font>
             <input type="text"  name="output2" value=""><br><br><br><br>
         </p>
         
@@ -83,8 +80,13 @@ jQuery(function(){
         </form>!-->
 
         <td>
-        <img src="/graph1.png"></img><!--< name="yyy">!-->
+        <p align="right"> 
+        <img src="/graph1.png"　width="600px" height="600px" style="position: absolute; right: 100px; top: 100px":/></img>
+        <!--< name="yyy">!-->
+        </p>
         </td>
+
+
 
     </form>
 
