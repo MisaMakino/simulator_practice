@@ -11,42 +11,48 @@ jQuery(function(){
 	});
 
 //Update data for form2
-function updateForm2() {
-jQuery(function(){
-	   jQuery.getJSON('/simulate1?input1='+ document.form2.button1.value + '&input2='+ document.form2.button2.value, 
-                        function(data) {
-		  	document.form2.output1.value = JSON.stringify(data.output1);
-            document.form2.output2.value = JSON.stringify(data.output2);
-		});
-	});
-}
+//function updateForm2() {
+//jQuery(function(){
+	   //jQuery.getJSON('/simulate1?input1='+ document.form2.button1.value + '&input2='+ document.form2.button2.value, 
+                        //function(data) {
+		  	//document.form2.output1.value = JSON.stringify(data.output1);
+            //document.form2.output2.value = JSON.stringify(data.output2);
+		//});
+	//});
+//}
 
 //function updateForm3() {
 	//yyy.src = '/graph1.png?input1='+ document.form2.button1.value + '&input2='+ document.form2.button2.value,
 //} 
 
+function updateForm2() {
+	yyy.src = '/graph1.png?input1='+ document.form2.button1.value + '&input2='+ document.form2.button2.value
+}
+
 </script>
+
+    <table border="0">
 	
 	<p align="center">          
     <font size="7">Choose your Plan</font>
     </p><br><br>  
 
-	<form name="form2" action="javascript:updateForm2()" method="POST">
+	<form name="form2" action="javascript:updateForm2()">
     
         
        <!--<p align="left">!--> 
             <font size="5">Choose Location</font><br>
             <input type="radio"  id="param1" name="button1" value="1">Onshore
-			<input type="radio"  id="param2" name="button1" value="2">Offshore
-			<input type="radio"  id="param3" name="button1" value="3">Subsea
+			<input type="radio"  id="param2" name="button1" value="Offshore">Offshore
+			<input type="radio"  id="param3" name="button1" value="Subsea">Subsea
             <br><br>
         </p>
 
         <p align="left"> 
             <font size="5">Choose Transportation Metod</font><br>
             <input type="radio"  id="param4" name="button2" value="4">Pipeline
-			<input type="radio"  id="param5" name="button2" value="5">via Plant
-			<input type="radio"  id="param6" name="button2" value="6">Ship
+			<input type="radio"  id="param5" name="button2" value="via Plant">via Plant
+			<input type="radio"  id="param6" name="button2" value="Ship">Ship
     		<br><br>
         </p>
         
@@ -59,7 +65,9 @@ jQuery(function(){
         </p>!-->
 
         <p align="left"> 
-            <input type="submit" value="Decide"><br><br><br>
+            <input type="submit" value="Decide" onClick= "yyy.src='/graph1.png'" > 
+             <!--onClick= "yyy.src='/graph1.png'">!-->
+             <br><br><br>
         </p>
 
 		<p align="left">
@@ -81,8 +89,9 @@ jQuery(function(){
 
         <td>
         <p align="right"> 
-        <img src="/graph1.png"　width="600px" height="600px" style="position: absolute; right: 100px; top: 100px":/></img>
-        <!--< name="yyy">!-->
+        <!--<img src="/graph1.png"　width="400px" height="600px" style="position: absolute; right: 100px; top: 100px":/></img>
+        !-->
+        <img src=" " name="yyy" width="400px" height="600px" style="position: absolute; right: 100px; top: 100px":/></img>
         </p>
         </td>
 
