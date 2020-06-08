@@ -95,8 +95,6 @@ def graph1():
         print('else')
 
     ax[0].scatter(x[i],y[i], s=80, c='r')
-    if i == -1:
-        ax[0].scatter(x, y, s=80, c='w')
 
 # ラジオボタンの選択結果の表を描画
     selected = str(Location_Trans[0]) + '_' + str(Location_Trans[1])
@@ -110,11 +108,13 @@ def graph1():
 # 概数に
     for i in range(9):
         l[0][i] = int(float(l[0][i])/1E+12)
-
+    
 # 表の中身
     df = pd.DataFrame(np.array([['$ '+str(l[0][0]),'$ '+str(l[0][1]),'$ '+str(l[0][2]),'$ '+str(l[0][3]),'$ '+str(l[0][4]),'$ '+str(l[0][5]),'$ '+str(l[0][6]),'$ '+str(l[0][7]),'$ '+str(l[0][8])],[str(l[1][0])+' TRL',str(l[1][1])+' TRL',str(l[1][2])+' TRL',str(l[1][3])+' TRL',str(l[1][4])+' TRL',str(l[1][5])+' TRL',str(l[1][6])+' TRL',str(l[1][7])+' TRL',str(round(float(l[1][8]),1))+' TRL',]]))
     plotting.table(ax[1], df, loc='center', rowLabels=['Cost','Risk'], colLabels=['Phase1','Phase2','Phase3','Phase4','Phase5','Phase6','Phase7','Phase8','Sum'])
     ax[1].axis('off')
+
+    # plt.savefig('graph_default.png')
 
 # canvasにプロットした画像を出力
     canvas = FigureCanvasAgg(fig)
