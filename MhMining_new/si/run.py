@@ -52,41 +52,20 @@ def simulate1():
 def graph1():
     print('run grraph1')
     global Location_Trans
-    # 冬眠
-    # button1 = request.args.get('input1')
-    # button2 = request.args.get('input2')
+ 
     print('Location_Trans = ' + str(Location_Trans))
 
-    # sys.exit()
-
-# # csvの選択
-#     FileName_pre = str(button1) + "_" + str(button2) 
-#     for i in range(12):
-#         FileName = FileName_pre + ".csv"
-#         FileDir = str(button1) + "_" + str(button2)
-#         FilePath_soutai = 'scenarios/'+ FileDir + '/' + FileName
-#         base = os.path.dirname(os.path.abspath(__file__))
-#         FilePath = os.path.normpath(os.path.join(base, FilePath_soutai))
-#         #data = pd.read_csv(FilePath,header = None, encoding="shift-jis").values.tolist()
-#         data = pd.read_csv(FilePath_soutai,header = None, encoding="shift-jis").values.tolist()
-
-# # csvの読み込み
-#     with open('./data/inputs.csv', 'r') as f:
-#         reader = csv.reader(f)
-#         inputs = list(reader)
-#         for row in reader:
-#             inputs = [row for row in reader]
-#     x = [i[2] for i in inputs]
-#     y = [float(i[1]) for i in inputs]
-#     data_name = [i[0] for i in inputs]
-
 # サンプルデータ（左からOnshore*Pipeline, Onshore*via Plants, ..., Subsea*Ship）
-    x = [1,2,3,4,5,6,7,8,9]
-    y = [1,2,3,4,5,6,7,8,9]
+    x = [2.0,2.1,2.5,2.8,4.0,5.0,5.2,6.6,8.8]
+    y = [8.0,7.1,4.4,5.8,2.5,5.0,2.2,2.0,1.7]
     # 9通りのプロット描画
     fig, ax = plt.subplots(2,1,figsize=(5,5))
     ax[0].scatter(x, y, s=80, c='g')
     ax[0].set_title('Cost and Risk')
+    ax[0].set_xlabel('Cost')
+    ax[0].set_ylabel('Risk')
+    ax[0].set_xlim(0,10)
+    ax[0].set_ylim(0,10)
 
 # ラジオボタンの選択結果の点を強調
     i = -1 #デフォルト
@@ -115,7 +94,9 @@ def graph1():
     else:
         print('else')
 
-    ax[0].scatter(x[i],y[i], s=100, c='r')
+    ax[0].scatter(x[i],y[i], s=80, c='r')
+    if i == -1:
+        ax[0].scatter(x, y, s=80, c='w')
 
 # ラジオボタンの選択結果の表を描画
     selected = str(Location_Trans[0]) + '_' + str(Location_Trans[1])
@@ -147,5 +128,5 @@ def graph1():
     return response   
 
 if __name__ == "__main__":
-    Location_Trans = [0, 0]
+    Location_Trans = [9, 9]
     app.run(debug=True)
