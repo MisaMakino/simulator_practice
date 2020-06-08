@@ -1,0 +1,86 @@
+<!doctype html>
+<title>MH Mining</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+//jQuery(function(){
+//	jQuery.getJSON('/simulate?input1='+ document.form2.param1.value + '&input2='+ document.form2.param2.value, function(data) {
+	//jQuery.getJSON('/json' , function(data) {
+		  	//document.form1.json_text1.value = JSON.stringify(data);
+		//});
+	//});
+
+//Update data for form2
+function updateForm2() {
+jQuery(function(){
+	   jQuery.getJSON('/simulate1?input1='+ document.form2.button1.value + '&input2='+ document.form2.button2.value, 
+                        function(data) {
+		  	document.form2.output1.value = JSON.stringify(data.output1);
+            document.form2.output2.value = JSON.stringify(data.output2);
+		});
+	});
+}
+
+function updateForm3() {
+	yyy.src = '/graph1.png?input1='+ document.form2.button1.value + '&input2='+ document.form2.button2.value 
+} 
+
+</script>
+    
+    <table border="0">
+
+      <tr>
+        
+	    <div align="center">          
+            <font size="7">Choose your Plan</font>
+        </div><br><br>  
+
+	    <form name="form2" action="javascript:updateForm2()">
+    
+        <div align="left">
+            <font size="5">Choose Location</font><br>
+            <input type="radio" name="button1" value="1" checked="checked" onClick="updateForm2()">Onshore
+			<input type="radio" name="button1" value="2" onClick="updateForm2()">Offshore
+			<input type="radio" name="button1" value="3" onClick="updateForm2()">Subsea
+            <br><br>
+        </div>
+
+        <div align="left"> 
+            <font size="5">Choose Transportation Method</font><br>
+            <input type="radio" name="button2" value="4" checked="checked" onClick="updateForm2()">Pipeline
+			<input type="radio" name="button2" value="5" onClick="updateForm2()">via Plant
+			<input type="radio" name="button2" value="6" onClick="updateForm2()">Ship
+    		<br><br>
+        </div>
+
+        <div align="left"> 
+            <input type="submit" value="Decide" onClick= "updateForm3()"><br><br><br>
+        </div>
+
+		
+        <div align="left">
+            <font size="4">Total Cost is</font>
+            <input type="text"  name="output1" value="">
+            <font size="4">$</font><br><br>
+        </div>
+
+        <div align="left">
+            <font size="4">Risk is</font>
+            <input type="text"  name="output2" value=""><br><br><br><br>
+        </div>
+        
+
+        </form>
+
+        <div>
+        
+        <img src=" " name ="yyy"  width="600px" height="800px" style="position: absolute; right: 100px; top: 80px":/> 
+        <!--
+        <form name="form3" action="javascript:updateForm3()">    
+        </form>
+        --> 
+        </div>
+
+    </table>
+
+</html>
