@@ -58,9 +58,22 @@ def graph1():
 # サンプルデータ（左からOnshore*Pipeline, Onshore*via Plants, ..., Subsea*Ship）
     x = [2.0,2.1,2.5,2.8,4.0,5.0,5.2,6.6,8.8]
     y = [8.0,7.1,4.4,5.8,2.5,5.0,2.2,2.0,1.7]
-    # 9通りのプロット描画
+# 9通りのプロット描画
     fig, ax = plt.subplots(2,1,figsize=(5,5))
-    ax[0].scatter(x, y, s=80, c='g')
+    #ax[0].scatter(x, y, s=80, marker="o", c='c')
+
+    #凡例や各プロットの形
+    ax[0].scatter(2.0, 8.0, s=60, marker="D", c='c', alpha=0.5, label = "$On_Pl$")
+    ax[0].scatter(2.1, 7.1, s=60, marker="D", c='c', alpha=0.5, label = "$On_vP$")
+    ax[0].scatter(2.5, 4.4, s=60, marker="D", c='c', alpha=0.5, label = "$On_Ship$")
+    ax[0].scatter(2.8, 5.8, s=60, marker="x", c='c', alpha=0.5, label = "$Off_Pl$")
+    ax[0].scatter(4.0, 2.5, s=60, marker="x", c='c', alpha=0.5, label = "$Off_vP$")
+    ax[0].scatter(5.0, 5.0, s=60, marker="x", c='c', alpha=0.5, label = "$Off_Ship$")
+    ax[0].scatter(5.2, 2.2, s=60, marker="^", c='c', alpha=0.5, label = "$Sub_Pl$")
+    ax[0].scatter(6.6, 2.0, s=60, marker="^", c='c', alpha=0.5, label = "$Sub_vP$")
+    ax[0].scatter(8.8, 1.7, s=60, marker="^", c='c', alpha=0.5, label = "$Sub_Ship$")
+    ax[0].legend(bbox_to_anchor=(0., -0.35, 1., .102), loc='upper left', borderaxespad=0, ncol=3, mode="expand", fontsize=6)
+
     ax[0].set_title('Cost and Risk')
     ax[0].set_xlabel('Cost')
     ax[0].set_ylabel('Risk')
@@ -94,7 +107,7 @@ def graph1():
     else:
         print('else')
 
-    ax[0].scatter(x[i],y[i], s=80, c='r')
+    ax[0].scatter(x[i],y[i], s=100, c='r', alpha=1.0)
 
 # ラジオボタンの選択結果の表を描画
     selected = str(Location_Trans[0]) + '_' + str(Location_Trans[1])
